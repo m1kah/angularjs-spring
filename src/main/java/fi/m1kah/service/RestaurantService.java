@@ -1,4 +1,4 @@
-package fi.m1kah.config;
+package fi.m1kah.service;
 
 /*
 Copyright (c) 2013 Mika Hämäläinen
@@ -22,24 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import fi.m1kah.service.RestaurantService;
-import fi.m1kah.service.RestaurantServiceImpl;
-import fi.m1kah.web.RestaurantController;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import fi.m1kah.domain.Restaurant;
 
-@Configuration
-@EnableWebMvc
-public class DispatcherConfig {
+import java.util.Collection;
 
-    @Bean
-    public RestaurantController restaurantController() {
-        return new RestaurantController(restaurantService());
-    }
-
-    @Bean
-    public RestaurantService restaurantService() {
-        return new RestaurantServiceImpl();
-    }
+public interface RestaurantService {
+    Collection<Restaurant> getRestaurants();
 }

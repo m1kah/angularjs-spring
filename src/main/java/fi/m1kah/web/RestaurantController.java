@@ -1,5 +1,4 @@
-package fi.m1kah.config;
-
+package fi.m1kah.web;
 /*
 Copyright (c) 2013 Mika Hämäläinen
 
@@ -22,24 +21,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import fi.m1kah.domain.Restaurant;
 import fi.m1kah.service.RestaurantService;
-import fi.m1kah.service.RestaurantServiceImpl;
-import fi.m1kah.web.RestaurantController;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import fi.m1kah.web.json.RestaurantJson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@Configuration
-@EnableWebMvc
-public class DispatcherConfig {
+import java.util.Collection;
 
-    @Bean
-    public RestaurantController restaurantController() {
-        return new RestaurantController(restaurantService());
+@Controller
+public class RestaurantController {
+    private static final Logger logger = LoggerFactory.getLogger(RestaurantController.class);
+    private final RestaurantService service;
+
+    @Autowired
+    public RestaurantController(RestaurantService service) {
+        this.service = service;
     }
 
-    @Bean
-    public RestaurantService restaurantService() {
-        return new RestaurantServiceImpl();
+    @RequestMapping
+    public @ResponseBody Collection<Restaurant> restaurants() {
+        return service.getRestaurants();
     }
 }
