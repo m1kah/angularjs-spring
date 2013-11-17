@@ -23,6 +23,7 @@ THE SOFTWARE.
 */
 
 import fi.m1kah.domain.Restaurant;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import java.util.Set;
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
     @Override
+    @Cacheable("restaurants")
     public Collection<Restaurant> getRestaurants() {
         List<Restaurant> restaurants = new ArrayList<Restaurant>();
 
@@ -40,6 +42,13 @@ public class RestaurantServiceImpl implements RestaurantService {
         restaurants.add(new Restaurant("Gourmet Place", 5));
         restaurants.add(new Restaurant("Pasta and Pizza", 2));
         restaurants.add(new Restaurant("Traditional Home Made", 4));
+
+        // Let's make our restaurant service really slow so that we can
+        // see effect of cache.
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+        }
 
         return restaurants;
     }

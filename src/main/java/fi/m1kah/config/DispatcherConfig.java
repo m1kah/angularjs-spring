@@ -25,6 +25,7 @@ THE SOFTWARE.
 import fi.m1kah.service.RestaurantService;
 import fi.m1kah.service.RestaurantServiceImpl;
 import fi.m1kah.web.RestaurantController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -32,14 +33,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableWebMvc
 public class DispatcherConfig {
+    @Autowired
+    private RestaurantService restaurantService;
 
     @Bean
     public RestaurantController restaurantController() {
-        return new RestaurantController(restaurantService());
+        return new RestaurantController(restaurantService);
     }
 
-    @Bean
-    public RestaurantService restaurantService() {
-        return new RestaurantServiceImpl();
-    }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ehcache
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="ehcache.xsd"
+        updateCheck="true" monitoring="autodetect" dynamicConfig="true">
+
+    <cache name="restaurants"
+            maxEntriesLocalHeap="1000"
+            memoryStoreEvictionPolicy="LRU"
+            timeToIdleSeconds="5"
+            timeToLiveSeconds="10"/>
+
+</ehcache>
