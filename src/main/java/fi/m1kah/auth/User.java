@@ -1,4 +1,4 @@
-package fi.m1kah.domain;
+package fi.m1kah.auth;
 
 /*
 Copyright (c) 2013 Mika Hämäläinen
@@ -22,36 +22,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-public class Restaurant {
-    private String name;
-    private Integer rating;
+public class User {
+    private static final User devuser = new User("dev");
 
-    public Restaurant() {
+    public static User getCurrent() {
+        return devuser;
     }
 
-    public Restaurant(String name, Integer rating) {
-        this.name = name;
-        this.rating = rating;
+    private final String userId;
+
+    public User(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     @Override
     public String toString() {
-        return name + " (" + rating + ")";
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
+        return userId;
     }
 }

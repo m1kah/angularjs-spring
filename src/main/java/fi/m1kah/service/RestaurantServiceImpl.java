@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import fi.m1kah.audit.AuditLog;
 import fi.m1kah.domain.Restaurant;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,7 @@ import java.util.Set;
 public class RestaurantServiceImpl implements RestaurantService {
     @Override
     @Cacheable("restaurants")
+    @AuditLog(serviceId = "restaurant", serviceName = "getRestaurants")
     public Collection<Restaurant> getRestaurants() {
         List<Restaurant> restaurants = new ArrayList<Restaurant>();
 

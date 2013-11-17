@@ -1,4 +1,4 @@
-package fi.m1kah.domain;
+package fi.m1kah.audit;
 
 /*
 Copyright (c) 2013 Mika Hämäläinen
@@ -22,36 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-public class Restaurant {
-    private String name;
-    private Integer rating;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-    public Restaurant() {
-    }
-
-    public Restaurant(String name, Integer rating) {
-        this.name = name;
-        this.rating = rating;
-    }
-
-    @Override
-    public String toString() {
-        return name + " (" + rating + ")";
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface AuditLog {
+    String serviceId();
+    String serviceName();
 }

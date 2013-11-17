@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+import fi.m1kah.audit.AuditLogAspect;
 import fi.m1kah.service.RestaurantService;
 import fi.m1kah.service.RestaurantServiceImpl;
 import org.springframework.cache.annotation.EnableCaching;
@@ -29,10 +30,12 @@ import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 @EnableCaching
+@EnableAspectJAutoProxy
 public class AppConfig {
     @Bean
     public RestaurantService restaurantService() {
@@ -52,5 +55,10 @@ public class AppConfig {
         factory.setConfigLocation(new ClassPathResource("ehcache.xml"));
         factory.setShared(true);
         return factory;
+    }
+
+    @Bean
+    public AuditLogAspect auditLogAspect() {
+        return new AuditLogAspect();
     }
 }
