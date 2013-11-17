@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" ng-app="restaurantApp">
+<head>
+    <meta charset="utf-8">
+    <title>AngularJS + Spring</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <script type="text/javascript" src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="lib/angular-resource.min.js"></script>
+    <script type="text/javascript" src="js/services.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+</head>
+<body ng-controller="restaurantListCtrl">
+    <div class="container">
+        <div class="row">
+            <h1>Restaurants</h1>
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Restaurant</th>
+                    <th>Rating</th>
+                </tr>
+                <tr ng-repeat="restaurant in restaurants">
+                    <td>{{restaurant.name}}</td>
+                    <td>{{restaurant.ratingSymbols}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
